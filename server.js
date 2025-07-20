@@ -34,7 +34,7 @@ app.post('/', async (req, res) => {
     const changes = entry?.changes?.[0];
     const message = changes?.value?.messages?.[0];
     const from = message?.from; // WhatsApp ID of the user
-    console.log(req.body.entry[0].changes[0].messages[0]);
+    console.log(req.body.entry[0].changes[0]);
     if (from) {
       // Step 2: Prepare your response text (LLM response can be plugged in here)
       const replyMessage = "This is a message from a LLM.";
