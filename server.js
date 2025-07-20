@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-import { GoogleGenAI } from "@google/genai";
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 
@@ -12,7 +12,7 @@ const accessToken = process.env.WHATSAPP_ACCESS_TOKEN; // <-- Set your WhatsApp 
 const phoneNumberId = process.env.PHONE_NUMBER_ID; 
 const geminiApiKey = process.env.GEMINI_API_KEY; 
 
-const ai = new GoogleGenAI({});
+const genAI = new GoogleGenerativeAI(geminiApiKey);// <-- Set your WhatsApp phone number ID
 
 // Verification endpoint for webhook setup
 app.get('/', (req, res) => {
@@ -41,11 +41,9 @@ app.post('/', async (req, res) => {
     console.log(`Received message from ${from}: ${userText}`);
     if (from) {
       // Step 2: Prepare your response text (LLM response can be plugged in here)
-      const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: userText,
-      });
-      const replyMessage = response.text() || "This is a message from Gemini LLM.";
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+      const geminiResult = await model.generateContent(userText);
+      const replyMessage = geminiResult.response.text() || "This is a message from Gemini LLM.";
 
       // Step 3: Send reply using WhatsApp Business API
       await axios.post(
