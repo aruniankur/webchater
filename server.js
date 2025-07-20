@@ -32,16 +32,16 @@ app.post('/', async (req, res) => {
   console.log(JSON.stringify(req.body, null, 2)); // Optional: Log the full payload
 
   // Step 1: Extract the message data
-  try {
+    try {
     const entry = req.body.entry?.[0];
     const changes = entry?.changes?.[0];
     const message = changes?.value?.messages?.[0];
     const from = message?.from; // WhatsApp ID of the user
-    try{
-      const userText = String(req.body.entry[0].changes[0].value['messages'][0]);
-    }
-    catch(e){
-      const userText = "define black hole"
+
+    // Extract user message text with fallback
+    let userText = "define black hole"; // Default fallback
+    if (message?.text?.body) {
+      userText = message.text.body;
     }
     console.log(`Received message from ${from}: ${userText}`);
     if (from) {
