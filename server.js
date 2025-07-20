@@ -37,7 +37,12 @@ app.post('/', async (req, res) => {
     const changes = entry?.changes?.[0];
     const message = changes?.value?.messages?.[0];
     const from = message?.from; // WhatsApp ID of the user
-    const userText = String(req.body.entry[0].changes[0].value['messages'][0]['text']);
+    try{
+      const userText = String(req.body.entry[0].changes[0].value['messages'][0]);
+    }
+    catch(e){
+      const userText = "define black hole"
+    }
     console.log(`Received message from ${from}: ${userText}`);
     if (from) {
       // Step 2: Prepare your response text (LLM response can be plugged in here)
