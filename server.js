@@ -46,10 +46,15 @@ app.post('/', async (req, res) => {
     console.log(`Received message from ${from}: ${userText}`);
     if (from) {
       // Step 2: Prepare your response text (LLM response can be plugged in here)
-      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
-      const geminiResult = await model.generateContent(userText);
-      const replyMessage = geminiResult.response.text() || "This is a message from Gemini LLM.";
-
+      const replyMessage = "This is a message from Gemini LLM.";
+      try{
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+        const geminiResult = await model.generateContent(userText);
+        replyMessage = geminiResult.response.text();
+      }
+      catch(e){
+        console.log(e);
+      }
       // Step 3: Send reply using WhatsApp Business API
       await axios.post(
         `https://graph.facebook.com/v19.0/${phoneNumberId}/messages`,
