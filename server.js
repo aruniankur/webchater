@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.post('/', async (req, res) => {
     const changes = entry?.changes?.[0];
     const message = changes?.value?.messages?.[0];
     const from = message?.from; // WhatsApp ID of the user
-
+    console.log(changes.messages?.[0].text.body)
     if (from) {
       // Step 2: Prepare your response text (LLM response can be plugged in here)
       const replyMessage = "This is a message from a LLM.";
