@@ -46,7 +46,7 @@ app.post('/', async (req, res) => {
     console.log(`Received message from ${from}: ${userText}`);
     if (from) {
       // Step 2: Prepare your response text (LLM response can be plugged in here)
-      const replyMessage = "This is a message from Gemini LLM.";
+      let replyMessage = "This is a message from Gemini LLM.";
       try{
         const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
         const geminiResult = await model.generateContent(userText);
