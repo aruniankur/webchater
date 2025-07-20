@@ -7,7 +7,7 @@ app.use(express.json());
 
 const port = process.env.PORT || 3000;
 const verifyToken = process.env.VERIFY_TOKEN;
-const accessToken = 'EAAPglKgQtUsBPOHbzRlMka8R5foROUfycDCtSZC63WHrwvH1qMR178Owea6vJ9rSFtT91CoGZAKDmewpIWN54WMZCROwE32WNfmY4R9AG7lF5bSeeEBppCMtMtVlIleOKBCon70q8ZAdpY4erQfrZAmnXcOfCeZAdVgdx4KAWu036AZBUlAS8Hn3P2tV0iPUrE305ksYYq0tBDkHiYrYEZAKFw67NM9czFt87f3QS141GkrwSwZDZD';
+const accessToken = 'EAAPglKgQtUsBPOHbzRlMka8R5foROUfycDCtSZC63WHrwvH1qMR178Owea6vJ9rSFtT91CoGZAKDmewpIWN54WMZCROwE32WNfmY4R9AG7lF5bSeeEBppCMtMtVlIleOKBCon70q8ZAdpY4erQfrZAmnXcOfCeZAdVgdx4KAWu036AZBUlAS8Hn3P2tV0iPUrE305ksYYq0tBDkHiYrYEZAKFw67NM9czFt87f3QS141GkrwSwZDZD'
 const phoneNumberId = 646116911928242;     // <-- Set your WhatsApp phone number ID
 
 // Verification endpoint for webhook setup
