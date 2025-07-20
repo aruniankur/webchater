@@ -51,6 +51,7 @@ app.post('/', async (req, res) => {
         const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
         const geminiResult = await model.generateContent(userText);
         replyMessage = geminiResult.response.text();
+        console.log(replyMessage);
       }
       catch(e){
         console.log(e);
